@@ -1,0 +1,43 @@
+@media screen and (max-width: 602px) {
+    body {
+        margin: 0;
+    }
+    .main-s1, .main-s2, .main-s3 {
+        width: 100%;
+        height: 100%;
+    }
+    .style-bar-s1,
+    .style-bar-s2, 
+    .style-bar-s3,
+    .display-view-s1,
+    .display-view-s2,
+    .display-view-s3,
+    .buttons-display-s1,
+    .buttons-display-s2,
+    .buttons-display-s3 {
+        width: 92%;
+    }
+    .buttons-display-s1,
+    .buttons-display-s2,
+    .buttons-display-s3 {
+        grid-template-columns: repeat(4, 21.25%);
+        grid-gap: 5%;
+        padding: 0;
+      }
+    button {
+        width: 100%;
+      }
+    .btnDouble1-s1>button,
+    .btnDouble1-s2>button,
+    .btnDouble1-s3>button {
+        width: 100% !important;
+    }
+    .btnDouble2-s1>button,
+    .btnDouble2-s2>button,
+    .btnDouble2-s3>button {
+        width: 100% !important;
+    }
+    .attribution { 
+        width: 100%;
+    }
+}

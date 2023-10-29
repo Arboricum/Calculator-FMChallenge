@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+  <link rel="icon" type="image/png" sizes="32x32" href="./images/favicon-32x32.png">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@700&display=swap">
+  <link rel="stylesheet" href="main.css">
+  <link rel="stylesheet" href="style1.css">
+  <link rel="stylesheet" href="style2.css">
+  <link rel="stylesheet" href="style3.css">
+  <link rel="stylesheet" href="mobile.css">
+  
+  <title>Frontend Mentor | Calculator app</title>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    
+  </style>
+</head>
+<body>
+  <main class="main-s1">
+    <section class="style-bar-s1">
+      <span>calc</span>
+      <span class="stylePicker">
+        THEME
+      </span>
+      <span>
+        <label for="style1">1</label>
+        <input type="radio" id="style1" name="style" value="style1" checked onclick="getSelectedStyle(this.value)"/>
+        <label for="style2">2</label>
+        <input type="radio" id="style2" name="style" value="style2" onclick="getSelectedStyle(this.value)"/>
+        <label for="style3">3</label>
+        <input type="radio" id="style3" name="style" value="style3" onclick="getSelectedStyle(this.value)"/>
+      </span>
+    </section>
+    <section class="display-view-s1">
+      <span id="numberDisplayed">0</span>
+    </section>
+    <section class="buttons-display-s1">
+      <span><button class="btn-number-s1">7</button></span>
+      <span><button class="btn-number-s1">8</button></span>
+      <span><button class="btn-number-s1">9</button></span>
+      <span><button class="btn-action-s1" id="del">DEL</button></span>
+
+      <span><button class="btn-number-s1">4</button></span>
+      <span><button class="btn-number-s1">5</button></span>
+      <span><button class="btn-number-s1">6</button></span>
+      <span><button class="btn-operation-s1">+</button></span>
+
+      <span><button class="btn-number-s1">1</button></span>
+      <span><button class="btn-number-s1">2</button></span>
+      <span><button class="btn-number-s1">3</button></span>
+      <span><button class="btn-operation-s1">-</button></span>
+
+      <span><button class="btn-number-s1">.</button></span>
+      <span><button class="btn-number-s1">0</button></span>
+      <span><button class="btn-operation-s1">/</button></span>
+      <span><button class="btn-operation-s1">x</button></span>
+
+      <span class="btnDouble1-s1"><button class="btn-action-s1" id="reset">RESET</button></span>
+      <span class="btnDouble2-s1"><button class="btn-equal-s1">=</button></span>
+    </section>
+    <footer class="attribution">
+      Challenge by <a href="https://www.frontendmentor.io?ref=challenge" target="_blank">Frontend Mentor</a>. 
+      Coded by <a href="#">Yari Piras</a>.
+    </footer>
+  </main>
+  
+  
+</body>
+
+<script src="calc.js"></script>
+<script src="setStyle.js"></script>
+
+<script>
+  /* const numberButtons = document.querySelectorAll('.btn-number');
+  const operationButtons = document.querySelectorAll('.btn-operation');
+  const btnEqual = document.querySelector('.btn-equal');
+  const btnDel = document.querySelector('#del');
+  const btnReset = document.querySelector('#reset');
+  const numberDisplayed = document.querySelector('#numberDisplayed');
+  let firstValue = 0;
+  let secondValue = undefined;
+  let operationsTriggered = false;
+  let resultsTriggered = false;
+  let equalTriggered = false;
+
+  numberButtons.forEach((button)=> {
+    button.onclick = () => getBtnValue(button.innerHTML);
+  });
+
+  operationButtons.forEach((button)=> {
+    button.onclick = () => triggerOperation(button.innerHTML);
+  });
+
+  btnEqual.onclick = () => triggerOperation(btnEqual.innerHTML);
+
+  btnReset.onclick = () => resetDisplay();
+  btnDel.onclick = () => deleteLastNumber();
+
+  const operationQueue = [];
+  let decimalEntered = false;
+
+  function getBtnValue(value) {    
+    if (numberDisplayed.innerHTML.indexOf('.') !== -1) {
+      decimalEntered = true;
+    }
+    console.log(decimalEntered)
+    if (numberDisplayed.innerHTML === '0' && value !== '0' && value !== '.' && firstValue === 0) {
+      numberDisplayed.innerHTML = value;
+    } else if (numberDisplayed.innerHTML !== '0' && value !== '0' && value !== '.' && firstValue === 0 && equalTriggered) {
+      numberDisplayed.innerHTML = value;
+      equalTriggered = false;
+    } else if (numberDisplayed.innerHTML !== '0' && value === '.' && firstValue === 0 && equalTriggered && !decimalEntered) {
+      numberDisplayed.innerHTML = value;
+      equalTriggered = false;
+    } else if (numberDisplayed.innerHTML === '0' && value === '0' && firstValue === 0) {
+      numberDisplayed.innerHTML = '0.';
+    } else if (firstValue === 0 && value !== '.') {
+      numberDisplayed.innerHTML += value;
+    } else if (firstValue === 0 && value === '.' && !decimalEntered) {
+      numberDisplayed.innerHTML += value;
+    }else if (firstValue !== 0 && value === '0' || value === '.' && secondValue === undefined && numberDisplayed.innerHTML !== '0' && numberDisplayed.innerHTML !== '0.') {
+      numberDisplayed.innerHTML = '0.';
+      secondValue = 1;
+    } else if (firstValue !== 0 && value !== '0' && value !== '.' && secondValue === undefined) {
+      console.log('yesyes',secondValue)
+      numberDisplayed.innerHTML = '';
+      numberDisplayed.innerHTML = value;
+      secondValue = 0;
+    } else if (firstValue !== 0 && value !== '0' && value !== '.' && secondValue === 0 || secondValue === 1) {
+      console.log('yes')
+      numberDisplayed.innerHTML += value;
+    } else if (firstValue !== 0 && value === '.' && secondValue === 0 || secondValue === 1 && !decimalEntered) {
+      console.log('second', secondValue)
+      numberDisplayed.innerHTML += value;
+    }
+  }
+
+  function triggerOperation(type) {
+    if (firstValue === 0 && numberDisplayed.innerHTML !== '0' && numberDisplayed.innerHTML !== '0.' && type !== '=' && !operationsTriggered) {
+      operationsTriggered = true;
+      firstValue = Number(numberDisplayed.innerHTML);
+      console.log(firstValue)
+      let decimalEntered = false;
+      if (operationQueue.length === 0) {
+        operationQueue.push(type);
+      }     
+    } else if (firstValue !== 0 && secondValue !== undefined && !resultsTriggered) {
+      resultsTriggered = true;
+      secondValue = Number(numberDisplayed.innerHTML);
+      operationResult(operationQueue[0], type);    
+    } 
+  }
+
+  function operationResult(type, nextType) {
+    operationQueue.pop();
+    if (nextType !== '=') {
+      operationQueue.push(nextType);
+    }
+    switch (type) {
+      case '+':
+        firstValue = sum(firstValue, secondValue);
+        secondValue = undefined;
+        numberDisplayed.innerHTML = firstValue;
+        break;
+      case '-':
+        firstValue = subtraction(firstValue, secondValue);
+        secondValue = undefined;
+        numberDisplayed.innerHTML = firstValue;
+        break;
+      case 'x':
+        firstValue = multiply(firstValue, secondValue);
+        secondValue = undefined;
+        numberDisplayed.innerHTML = firstValue;
+        break;
+      case '/':
+        firstValue = divide(firstValue, secondValue);
+        secondValue = undefined;
+        numberDisplayed.innerHTML = firstValue;
+        break;
+    }
+    if (nextType === '=') {
+      firstValue = 0;
+      equalTriggered = true;
+    }
+    operationsTriggered = false;
+    resultsTriggered = false;
+  }
+
+  function sum(value1, value2) {
+      return value1 + value2;
+  }
+  function subtraction(value1, value2) {
+      return value1 - value2;
+  }
+  function multiply(value1, value2) {
+      return value1 * value2;
+  }
+  function divide(value1, value2) {
+      return value1 / value2;
+  }
+  function deleteLastNumber() {
+    if (numberDisplayed.innerHTML.length > 1) {
+    numberDisplayed.innerHTML = numberDisplayed.innerHTML.slice(0, -1);
+    }
+  }
+  function resetDisplay() {
+    numberDisplayed.innerHTML = '0';
+    firstValue = 0;
+    secondValue = undefined;
+    operationQueue.pop();
+    operationsTriggered = false;
+    resultsTriggered = false;
+    equalTriggered = false;
+  } */
+</script>
+</html>
