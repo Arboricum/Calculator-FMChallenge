@@ -26,8 +26,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](here on GitHub)
-- Live Site URL: [Add live site URL here](https://www.yaripiras.it)
+- Solution URL: [GitHub](https://github.com/Arboricum/Calculator-FMChallenge)
+- Live Site URL: [GitHub](https://arboricum.github.io/Calculator-FMChallenge/)
 
 ## My process
 
